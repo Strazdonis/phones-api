@@ -101,6 +101,78 @@ router.route('/phones/:phone_id')
     });
 
 
+    router.route('/manufacturers')
+    // ?CREATE NEW MANUFACTURER
+    .post(function (req, res) {
+        const body = req.body;
+        console.log(body);
+        const manf = new Manufacturer();
+        // validation happens in model scheme
+        const data = body;
+        manf.name = data.name;
+        
+
+        manf.save(function (err, manf) {
+            if (err) {
+                return res.send(err).status(400);
+            }
+
+            res.json({ message: 'Manufacturer created!', manf });
+        });
+    })
+    // ?GET ALL MANUFACTURERS
+    .get(function (req, res) {
+        Manufacturer.find(function (err, manfs) {
+            if (err) {
+                return res.send(err).status(400);
+            }
+
+            res.json(manfs);
+        });
+    });                                                                                             // Is didziosio Phone bus Manuf.... is mazios keist , phones variable 
+
+router.route('/manufacturers/:manufacturer_id')
+    // ? Find manufacturer by ID
+    .get(function (req, res) {
+        Manufacturer.findById(req.params.manufacturer_id, function (err, manf) {
+            if (err) {
+                return res.send(err).status(404);
+            }
+
+            res.json(manf);
+        });
+    })
+    // ? Update manufacturers by ID
+    .put(function (req, res) {
+        Manufacturer.findById(req.params.manufacturer_id, function (err, manf) {
+            if (err) {
+                return res.send(err).status(404);
+            }
+
+            manf.name = req.body.name;
+            manf.save(function (err) {
+                if (err) {
+                    return res.send(err).status(500);
+                }
+
+                res.json({ message: 'Manufacturer updated!' });
+            });
+
+        });
+    })
+    .delete(function(req, res) {
+        Manufacturer.remove({
+            _id: req.params. manufacturer_id
+        }, function(err, manf) {
+            if (err) {
+                return res.send(err).status(400);
+            }
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+
+
 app.use('/api/v1', router);
 
 app.listen(port);
