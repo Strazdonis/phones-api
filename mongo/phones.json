@@ -1,0 +1,26 @@
+[
+    {
+        "_id": {
+            "$oid": "604ba829a7ba7f3780209a64"
+        },
+        "photoUrls": [],
+        "description": "some text",
+        "name": "iPhone 5",
+        "manufacturer": {
+            "$oid": "604ba6d186d6aa2490c854f2"
+        },
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "60401a336a45a10ff4ace2f6"
+        },
+        "photoUrls": [],
+        "description": "123",
+        "name": "iPhone 12",
+        "manufacturer": {
+            "$oid": "604ba6d186d6aa2490c854f2"
+        },
+        "__v": 0
+    }
+]

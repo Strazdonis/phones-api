@@ -2,7 +2,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const Phone = require('./models/phone');
 const Manufacturer = require('./models/manufacturer');
 const port = process.env.PORT || 80;
