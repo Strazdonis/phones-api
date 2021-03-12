@@ -8,12 +8,12 @@ const PhoneSchema   = new Schema({
         trim: true,
         required: true,
     },
-    //manufacturer: {type: Schema.ObjectId, ref: 'Manufacturer'},
-    manufacturer: {
-        type: String,
-        trim: true,
-        required: true,
-    },
+    manufacturer: {type: Schema.ObjectId, ref: 'Manufacturer'},
+    // manufacturer: {
+    //     type: String,
+    //     trim: true,
+    //     required: true,
+    // },
     photoUrls: {
         type: [String],
         required: true,

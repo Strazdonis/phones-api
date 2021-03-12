@@ -62,7 +62,7 @@ router.route('/phones')
 router.route('/phones/:phone_id')
     // ? Find phone by ID
     .get(function (req, res) {
-        Phone.findById(req.params.phone_id, function (err, phone) {
+        Phone.findById(req.params.phone_id).populate('manufacturer').exec(function (err, phone) {
             if (err) {
                 return res.send(err).status(404);
             }
@@ -89,7 +89,7 @@ router.route('/phones/:phone_id')
         });
     })
     .delete(function(req, res) {
-        Phone.remove({
+        Phone.deleteOne({
             _id: req.params. phone_id
         }, function(err, phone) {
             if (err) {
@@ -129,7 +129,7 @@ router.route('/phones/:phone_id')
 
             res.json(manfs);
         });
-    });                                                                                             // Is didziosio Phone bus Manuf.... is mazios keist , phones variable 
+    });                                                                                            
 
 router.route('/manufacturers/:manufacturer_id')
     // ? Find manufacturer by ID
@@ -161,7 +161,7 @@ router.route('/manufacturers/:manufacturer_id')
         });
     })
     .delete(function(req, res) {
-        Manufacturer.remove({
+        Manufacturer.deleteOne({
             _id: req.params. manufacturer_id
         }, function(err, manf) {
             if (err) {
