@@ -23,7 +23,7 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', function (req, res) {
-    res.json({ message: 'available endpoints: /phones' }).status(200);
+    res.json({ message: 'available endpoints: /phones \n available endpoints: /manufacturers ' }).status(200);
 });
 
 router.route('/phones')
@@ -89,7 +89,7 @@ router.route('/phones/:phone_id')
     })
     .delete(function(req, res) {
         Phone.deleteOne({
-            _id: req.params. phone_id
+            _id: req.params.phone_id
         }, function(err, phone) {
             if (err) {
                 return res.send(err).status(400);
@@ -161,7 +161,7 @@ router.route('/manufacturers/:manufacturer_id')
     })
     .delete(function(req, res) {
         Manufacturer.deleteOne({
-            _id: req.params. manufacturer_id
+            _id: req.params.manufacturer_id
         }, function(err, manf) {
             if (err) {
                 return res.send(err).status(400);
