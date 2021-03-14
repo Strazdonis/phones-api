@@ -23,14 +23,13 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', function (req, res) {
-    res.json({ message: 'available endpoints: /phones \n available endpoints: /manufacturers ' }).status(200);
+    res.json({ message: 'available endpoints: /phones /manufacturers' }).status(200);
 });
 
 router.route('/phones')
     // ?CREATE NEW PHONE
     .post(function (req, res) {
         const body = req.body;
-        console.log(body);
         const phone = new Phone();
         // validation happens in model scheme
         const data = body;
@@ -76,13 +75,16 @@ router.route('/phones/:phone_id')
                 return res.send(err).status(404);
             }
 
-            phone.name = req.body.name;
+            phone.name = req.body.name || phone.name;
+            phone.description = req.body.description || phone.description;
+            phone.manufacturer = req.body.manufacturer || phone.manufacturer;
+            phone.photoUrls = req.body.photoUrls || phone.photoUrls;
             phone.save(function (err) {
                 if (err) {
                     return res.send(err).status(500);
                 }
 
-                res.json({ message: 'Phone updated!' });
+                res.json({ message: 'Phone updated!', phone });
             });
 
         });
@@ -154,7 +156,7 @@ router.route('/manufacturers/:manufacturer_id')
                     return res.send(err).status(500);
                 }
 
-                res.json({ message: 'Manufacturer updated!' });
+                res.json({ message: 'Manufacturer updated!', manufacturer: manf });
             });
 
         });
