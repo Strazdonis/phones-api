@@ -1,0 +1,24 @@
+networks:
+  mynetwork:
+
+services:
+  web:
+    image: docker-node-mongo
+    build: .
+    command: "node index.js"
+    ports:
+      - "80:80"
+    depends_on:
+      - "mongo"
+    networks:
+      - mynetwork
+  mongo:
+    image: "mongo"
+    networks:
+      - mynetwork
+  mongo-seed:
+    build: ./mongo-seed
+    links:
+      - mongo
+    networks:
+      - mynetwork

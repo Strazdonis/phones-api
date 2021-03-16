@@ -4,10 +4,10 @@ const express = require('express');
 const app = express();
 const Phone = require('./models/phone');
 const Manufacturer = require('./models/manufacturer');
-const port = process.env.PORT || 80;
+const port = 80;
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.DB_URI, {
+mongoose.connect("mongodb://mongo:27017/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).catch(err => console.error(err));
