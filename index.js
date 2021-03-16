@@ -1,5 +1,4 @@
 /* jshint esversion: 9 */
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const Phone = require('./models/phone');
@@ -12,7 +11,6 @@ mongoose.connect("mongodb://mongo:27017/", {
     useUnifiedTopology: true,
 }).catch(err => console.error(err));
 
-app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 const router = express.Router();
