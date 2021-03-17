@@ -55,7 +55,7 @@ router.route('/phones/:phone_id')
     .get(function (req, res) {
         Phone.findById(req.params.phone_id).populate('manufacturer').exec(function (err, phone) {
             if (err) {
-                return res.status(500).send({message: err.reason.message});
+                return res.status(400).send({message: err.reason.message});
             }
             if(phone) {
                 res.status(200).json(phone);
@@ -82,7 +82,7 @@ router.route('/phones/:phone_id')
             phone.photoUrls = req.body.photoUrls || phone.photoUrls;
             phone.save(function (err) {
                 if (err) {
-                    return res.status(500).send(err);
+                    return res.status(400).send(err);
                 }
 
                 res.status(202).json({ message: 'Phone updated!', phone });
@@ -141,7 +141,7 @@ router.route('/manufacturers/:manufacturer_id')
     .get(function (req, res) {
         Manufacturer.findById(req.params.manufacturer_id, function (err, manf) {
             if (err) {
-                return res.status(500).send({message: err.reason.message});
+                return res.status(400).send({message: err.reason.message});
             }
 
             if(manf) {
@@ -164,7 +164,7 @@ router.route('/manufacturers/:manufacturer_id')
             manf.name = req.body.name;
             manf.save(function (err) {
                 if (err) {
-                    return res.status(500).send(err);
+                    return res.status(400).send(err);
                 }
 
                 res.status(202).json({ message: 'Manufacturer updated!', manufacturer: manf });
