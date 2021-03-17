@@ -7,12 +7,15 @@ All information is expected and provided in **JSON** format.
 ### [Postman](https://documenter.getpostman.com/view/8269992/Tz5s5HBo)
 
 # Requirements
-* Git
+* Git 
 
   For running locally:
 
 * Node.JS (tested with v14 & v15 but others should be fine)
-  For running as a Docker image
+
+  For running as a Docker image:
+
+
 * Docker
 
 # Setup for developemnt
