@@ -15,11 +15,6 @@ app.use(express.json());
 
 const router = express.Router();
 
-// router.use(function (req, res, next) {
-//     console.log(`[${req.url}]`);
-//     next(); // continue to next callback
-// });
-
 router.get('/', function (req, res) {
     res.json({ message: 'available endpoints: /phones /manufacturers' }).status(200);
 });
