@@ -43,7 +43,7 @@ router.route('/phones')
     .get(function (req, res) {
         Phone.find(function (err, phones) {
             if (err) {
-                return res.send(err).status(400);
+                return res.send(err).status(404);
             }
 
             res.json(phones).status(200);
@@ -87,7 +87,7 @@ router.route('/phones/:phone_id')
             _id: req.params.phone_id
         }, function(err, phone) {
             if (err) {
-                return res.send(err).status(400);
+                return res.send(err).status(404);
             }
 
             res.json({ message: 'Successfully deleted' }).status(204);
@@ -117,7 +117,7 @@ router.route('/phones/:phone_id')
     .get(function (req, res) {
         Manufacturer.find(function (err, manfs) {
             if (err) {
-                return res.send(err).status(400);
+                return res.send(err).status(404);
             }
 
             res.json(manfs).status(200);
@@ -158,7 +158,7 @@ router.route('/manufacturers/:manufacturer_id')
             _id: req.params.manufacturer_id
         }, function(err, manf) {
             if (err) {
-                return res.send(err).status(400);
+                return res.send(err).status(404);
             }
 
             res.json({ message: 'Successfully deleted' }).status(204);
