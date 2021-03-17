@@ -8,7 +8,9 @@ All information is expected and provided in **JSON** format.
 
 # Requirements
 * Git
+
   For running locally:
+
 * Node.JS (tested with v14 & v15 but others should be fine)
   For running as a Docker image
 * Docker
