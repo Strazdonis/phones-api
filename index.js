@@ -6,7 +6,7 @@ const Manufacturer = require('./models/manufacturer');
 const port = 80;
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb+srv://chinakomba:KDZpFq46yhemMAy@cof.agyq3.mongodb.net", {
+mongoose.connect("mongodb://mongo:27017/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).catch(err => console.error(err));
