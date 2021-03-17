@@ -6,7 +6,7 @@ const Manufacturer = require('./models/manufacturer');
 const port = 80;
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://mongo:27017/", {
+mongoose.connect("mongodb+srv://chinakomba:C8pZSkUb73UZLZb@cof.agyq3.mongodb.net", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).catch(err => console.error(err));
@@ -40,7 +40,7 @@ router.route('/phones')
             if (err) {
                 return res.send(err).status(400);
             }
-
+            res.set('location', `/api/v1/phones/${phone.id}`);
             res.json({ message: 'Phone created!', phone }).status(201);
         });
     })
@@ -104,7 +104,6 @@ router.route('/phones/:phone_id')
     // ?CREATE NEW MANUFACTURER
     .post(function (req, res) {
         const body = req.body;
-        console.log(body);
         const manf = new Manufacturer();
         // validation happens in model scheme
         const data = body;
@@ -115,7 +114,7 @@ router.route('/phones/:phone_id')
             if (err) {
                 return res.send(err).status(400);
             }
-
+            res.set('location', `/api/v1/manufacturers/${manf.id}`);
             res.json({ message: 'Manufacturer created!', manf }).status(201);
         });
     })
