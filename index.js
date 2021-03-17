@@ -15,10 +15,10 @@ app.use(express.json());
 
 const router = express.Router();
 
-router.use(function (req, res, next) {
-    console.log(`[${req.url}]`);
-    next(); // continue to next callback
-});
+// router.use(function (req, res, next) {
+//     console.log(`[${req.url}]`);
+//     next(); // continue to next callback
+// });
 
 router.get('/', function (req, res) {
     res.json({ message: 'available endpoints: /phones /manufacturers' }).status(200);
@@ -41,7 +41,7 @@ router.route('/phones')
                 return res.send(err).status(400);
             }
 
-            res.json({ message: 'Phone created!', phone });
+            res.json({ message: 'Phone created!', phone }).status(201);
         });
     })
     // ?GET ALL PHONES
@@ -51,7 +51,7 @@ router.route('/phones')
                 return res.send(err).status(400);
             }
 
-            res.json(phones);
+            res.json(phones).status(200);
         });
     });
 
@@ -63,7 +63,7 @@ router.route('/phones/:phone_id')
                 return res.send(err).status(404);
             }
 
-            res.json(phone);
+            res.json(phone).status(200);
         });
     })
     // ? Update phone by ID
@@ -82,7 +82,7 @@ router.route('/phones/:phone_id')
                     return res.send(err).status(500);
                 }
 
-                res.json({ message: 'Phone updated!', phone });
+                res.json({ message: 'Phone updated!', phone }).status(202);
             });
 
         });
@@ -95,7 +95,7 @@ router.route('/phones/:phone_id')
                 return res.send(err).status(400);
             }
 
-            res.json({ message: 'Successfully deleted' });
+            res.json({ message: 'Successfully deleted' }).status(204);
         });
     });
 
@@ -116,7 +116,7 @@ router.route('/phones/:phone_id')
                 return res.send(err).status(400);
             }
 
-            res.json({ message: 'Manufacturer created!', manf });
+            res.json({ message: 'Manufacturer created!', manf }).status(201);
         });
     })
     // ?GET ALL MANUFACTURERS
@@ -126,7 +126,7 @@ router.route('/phones/:phone_id')
                 return res.send(err).status(400);
             }
 
-            res.json(manfs);
+            res.json(manfs).status(200);
         });
     });                                                                                            
 
@@ -138,7 +138,7 @@ router.route('/manufacturers/:manufacturer_id')
                 return res.send(err).status(404);
             }
 
-            res.json(manf);
+            res.json(manf).status(200);
         });
     })
     // ? Update manufacturers by ID
@@ -154,7 +154,7 @@ router.route('/manufacturers/:manufacturer_id')
                     return res.send(err).status(500);
                 }
 
-                res.json({ message: 'Manufacturer updated!', manufacturer: manf });
+                res.json({ message: 'Manufacturer updated!', manufacturer: manf }).status(202);
             });
 
         });
@@ -167,7 +167,7 @@ router.route('/manufacturers/:manufacturer_id')
                 return res.send(err).status(400);
             }
 
-            res.json({ message: 'Successfully deleted' });
+            res.json({ message: 'Successfully deleted' }).status(204);
         });
     });
 
