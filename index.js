@@ -6,7 +6,7 @@ const Manufacturer = require('./models/manufacturer');
 const port = 80;
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://mongo:27017/", {
+mongoose.connect("mongodb+srv://chinakomba:KDZpFq46yhemMAy@cof.agyq3.mongodb.net", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).catch(err => console.error(err));
@@ -16,7 +16,7 @@ app.use(express.json());
 const router = express.Router();
 
 router.get('/', function (req, res) {
-    res.json({ message: 'available endpoints: /phones /manufacturers' }).status(200);
+    res.status(200).json({ message: 'available endpoints: /phones /manufacturers' });
 });
 
 router.route('/phones')
@@ -33,20 +33,20 @@ router.route('/phones')
 
         phone.save(function (err, phone) {
             if (err) {
-                return res.send(err).status(400);
+                return res.status(400).send(err);
             }
             res.set('location', `/api/v1/phones/${phone.id}`);
-            res.json({ message: 'Phone created!', phone }).status(201);
+            res.status(201).json({ message: 'Phone created!', phone });
         });
     })
     // ?GET ALL PHONES
     .get(function (req, res) {
         Phone.find(function (err, phones) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(404).send(err);
             }
 
-            res.json(phones).status(200);
+            res.status(200).json(phones);
         });
     });
 
@@ -55,17 +55,25 @@ router.route('/phones/:phone_id')
     .get(function (req, res) {
         Phone.findById(req.params.phone_id).populate('manufacturer').exec(function (err, phone) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(500).send({message: err.reason.message});
+            }
+            if(phone) {
+                res.status(200).json(phone);
+            } else {
+                res.status(404).json({message: "Phone not found"});
             }
 
-            res.json(phone).status(200);
         });
     })
     // ? Update phone by ID
     .put(function (req, res) {
         Phone.findById(req.params.phone_id, function (err, phone) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(404).send(err);
+            }
+
+            if(!phone) {
+                return res.status(404).json({message: "Phone not found"});
             }
 
             phone.name = req.body.name || phone.name;
@@ -74,10 +82,10 @@ router.route('/phones/:phone_id')
             phone.photoUrls = req.body.photoUrls || phone.photoUrls;
             phone.save(function (err) {
                 if (err) {
-                    return res.send(err).status(500);
+                    return res.status(500).send(err);
                 }
 
-                res.json({ message: 'Phone updated!', phone }).status(202);
+                res.status(202).json({ message: 'Phone updated!', phone });
             });
 
         });
@@ -87,10 +95,14 @@ router.route('/phones/:phone_id')
             _id: req.params.phone_id
         }, function(err, phone) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(404).send(err);
+            }
+            if(phone.n > 0) {
+                res.status(204).json({ message: 'Successfully deleted' });
+            } else {
+                res.status(404).json({message: "Phone not found"});
             }
 
-            res.json({ message: 'Successfully deleted' }).status(204);
         });
     });
 
@@ -107,7 +119,7 @@ router.route('/phones/:phone_id')
 
         manf.save(function (err, manf) {
             if (err) {
-                return res.send(err).status(400);
+                return res.status(400).send(err);
             }
             res.set('location', `/api/v1/manufacturers/${manf.id}`);
             res.json({ message: 'Manufacturer created!', manf }).status(201);
@@ -117,10 +129,10 @@ router.route('/phones/:phone_id')
     .get(function (req, res) {
         Manufacturer.find(function (err, manfs) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(404).send(err);
             }
 
-            res.json(manfs).status(200);
+            res.status(200).json(manfs);
         });
     });                                                                                            
 
@@ -129,26 +141,33 @@ router.route('/manufacturers/:manufacturer_id')
     .get(function (req, res) {
         Manufacturer.findById(req.params.manufacturer_id, function (err, manf) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(500).send({message: err.reason.message});
             }
 
-            res.json(manf).status(200);
+            if(manf) {
+                res.status(200).json(manf);
+            } else {
+                res.status(404).json({message: "Manufacturer not found"});
+            }
         });
     })
     // ? Update manufacturers by ID
     .put(function (req, res) {
         Manufacturer.findById(req.params.manufacturer_id, function (err, manf) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(404).send(err);
             }
 
+            if(!manf) {
+                return res.status(404).json({message: "Manufacturer not found"});
+            }
             manf.name = req.body.name;
             manf.save(function (err) {
                 if (err) {
-                    return res.send(err).status(500);
+                    return res.status(500).send(err);
                 }
 
-                res.json({ message: 'Manufacturer updated!', manufacturer: manf }).status(202);
+                res.status(202).json({ message: 'Manufacturer updated!', manufacturer: manf });
             });
 
         });
@@ -158,10 +177,10 @@ router.route('/manufacturers/:manufacturer_id')
             _id: req.params.manufacturer_id
         }, function(err, manf) {
             if (err) {
-                return res.send(err).status(404);
+                return res.status(404).send(err);
             }
 
-            res.json({ message: 'Successfully deleted' }).status(204);
+            res.status(204).json({ message: 'Successfully deleted' });
         });
     });
 
