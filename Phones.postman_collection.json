@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "bd87df29-437c-4111-a358-0f9975e897a8",
+		"name": "Phones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Phones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/phones/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"phones",
+						""
+					]
+				},
+				"description": "Returns all created phones in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Create phone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"iPhone 3\",\r\n    \"photoUrls\": [], \r\n    \"manufacturer\": \"60509d9f042196b1374c2ad7\",\r\n    \"description\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/phones/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"phones",
+						""
+					]
+				},
+				"description": "Creates a new phone based on the JSON provided. Expects a manufacturer ID. Returns the created phone in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Update phone",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"One of the best phones in the current market.\",\r\n    \"name\": \"iPhone 5\",\r\n    \"photoUrls\": [\"12\", \"13\"],\r\n    \"owners\": [\"123\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/phones/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"phones",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "604ba829a7ba7f3780209b64"
+						}
+					]
+				},
+				"description": "Updates phone based on the JSON provided, unnecessary fields can be emitted. Returns the update phone in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete phone by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/phones/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"phones",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6040151eaa1aee062c15d6ec"
+						}
+					]
+				},
+				"description": "Deletes the phone based on it's ID. Returns \n`{ message: 'Successfully deleted' }` or an error."
+			},
+			"response": []
+		},
+		{
+			"name": "Get phone by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/phones/604ba829a7ba7f3780209a64s",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"phones",
+						"604ba829a7ba7f3780209a64s"
+					]
+				},
+				"description": "Returns phone JSON or `null` if the phone wasn't found."
+			},
+			"response": []
+		},
+		{
+			"name": "Get all manufacturers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/manufacturers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"manufacturers",
+						""
+					]
+				},
+				"description": "Gets all manufacturers and returns them in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Create new manufacturer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Samsung\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/manufacturers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"manufacturers",
+						""
+					]
+				},
+				"description": "Creates a new manufacturer based on the JSON provided. Returns the created manufacturer in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Update manufacturer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Apple\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/manufacturers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"manufacturers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "60509d9f042196b1374c2ad7"
+						}
+					]
+				},
+				"description": "Updates a manufacturer based on the provided JSON. Only the name can be updated. Returns the updated manufacturer in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Get manufacturer by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/manufacturers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"manufacturers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "60509d9f042196b1374c2ad7"
+						}
+					]
+				},
+				"description": "Returns the found manufacturer in JSON format or `null`."
+			},
+			"response": []
+		},
+		{
+			"name": "Get contacts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/contacts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/contacts/:contact_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						":contact_id"
+					],
+					"variable": [
+						{
+							"key": "contact_id",
+							"value": "123"
+						}
+					]
+				},
+				"description": "Returns phone JSON or `null` if the phone wasn't found."
+			},
+			"response": []
+		},
+		{
+			"name": "Create contact",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"123\",\r\n    \"name\": \"Tom\",\r\n    \"surname\": \"Brady\",\r\n    \"number\": \"+37066666666\",\r\n    \"email\": \"tombrady@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/contacts/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						""
+					]
+				},
+				"description": "Creates a new phone based on the JSON provided. Expects a manufacturer ID. Returns the created phone in JSON format."
+			},
+			"response": []
+		},
+		{
+			"name": "Update contact",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"0\",\r\n    \"name\": \"Tomas\",\r\n    \"surname\": \"Bredis\",\r\n    \"number\": \"+37065555555\",\r\n    \"email\": \"tomasbredis@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/contacts/:contact_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						":contact_id"
+					],
+					"variable": [
+						{
+							"key": "contact_id",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete contact",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/contacts/:contact_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"contacts",
+						":contact_id"
+					],
+					"variable": [
+						{
+							"key": "contact_id",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

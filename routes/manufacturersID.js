@@ -1,3 +1,4 @@
+const Manufacturer = require('../models/manufacturer');
 module.exports = (router) => {
     router.route('/manufacturers/:manufacturer_id')
         // ? Find manufacturer by ID

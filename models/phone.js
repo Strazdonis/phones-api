@@ -1,19 +1,18 @@
 /* jshint esversion: 9 */
-const mongoose     = require('mongoose');
-const Schema       = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const PhoneSchema   = new Schema({
+const PhoneSchema = new Schema({
     name: {
         type: String,
         trim: true,
         required: true,
     },
-    manufacturer: {type: Schema.ObjectId, ref: 'Manufacturer'},
-    // manufacturer: {
-    //     type: String,
-    //     trim: true,
-    //     required: true,
-    // },
+    owners: {
+        type: [Number],
+        default: null,
+    },
+    manufacturer: { type: Schema.ObjectId, ref: 'Manufacturer' },
     photoUrls: {
         type: [String],
         required: true,

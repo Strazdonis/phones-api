@@ -11,6 +11,7 @@ module.exports = (router) => {
             phone.manufacturer = data.manufacturer;
             phone.photoUrls = data.photoUrls;
             phone.description = data.description;
+            phone.owners = data.owners;
 
             phone.save(function (err, phone) {
                 if (err) {

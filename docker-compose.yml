@@ -10,6 +10,13 @@ services:
       - "80:80"
     depends_on:
       - "mongo"
+      - "contacts"
+    networks:
+      - mynetwork
+  contacts:
+    build:
+      context: contacts
+      dockerfile: Dockerfile
     networks:
       - mynetwork
   mongo:

@@ -1,3 +1,4 @@
+const Phone = require('../models/phone');
 module.exports = (router) => {
     router.route('/phones/:phone_id')
         // ? Find phone by ID
@@ -29,6 +30,7 @@ module.exports = (router) => {
                 phone.description = req.body.description || phone.description;
                 phone.manufacturer = req.body.manufacturer || phone.manufacturer;
                 phone.photoUrls = req.body.photoUrls || phone.photoUrls;
+                phone.owners = req.body.owners || phone.owners;
                 phone.save(function (err) {
                     if (err) {
                         return res.status(400).send(err);
@@ -54,4 +56,4 @@ module.exports = (router) => {
 
             });
         });
-}
+};
