@@ -1,14 +1,52 @@
 const Phone = require('../models/phone');
+const request = require('request');
+const getContact = (id) => {
+    const options = {
+        method: "GET",
+        uri: `http://contacts:5000/contacts/${id}`,
+        timeout: 3000,
+        json: true,
+    };
+    return new Promise((resolve, reject) => {
+        request(options, (err, res) => {
+            if (err) {
+                console.error("ERR", err);
+                return reject(err);
+            }
+            console.log("BODY", res.body);
+            return resolve(res.body || null);
+        });
+    });
+};
+
 module.exports = (router) => {
     router.route('/phones/:phone_id')
         // ? Find phone by ID
         .get(function (req, res) {
-            Phone.findById(req.params.phone_id).populate('manufacturer').exec(function (err, phone) {
+            Phone.findById(req.params.phone_id).populate('manufacturer').exec(async function (err, phone) {
                 if (err) {
                     return res.status(400).send({ message: err.reason.message });
                 }
                 if (phone) {
-                    res.status(200).json(phone);
+                    let ignoreOwners = false;
+                    for (let i = 0; i < phone.owners; i++) {
+                        const owner = await getContact(phone.owners[i]).catch(console.error) || null;
+                        if(owner == null) {
+                            ignoreOwners = true;
+                            break;
+                        }
+                        phone.owners[i] = owner;
+                    }
+                    
+                    if(ignoreOwners) {
+                        const {owners, ...payload} = phone._doc;
+                        console.log("RETURNING PAYLOAD", payload, phone);
+                        res.status(200).json(payload);
+                    } else {
+                        console.log("RETURNING PHONE", phone)
+                        res.status(200).json(phone);
+                    }
+                    
                 } else {
                     res.status(404).json({ message: "Phone not found" });
                 }

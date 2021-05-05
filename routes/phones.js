@@ -1,4 +1,42 @@
 const Phone = require('../models/phone');
+const request = require('request');
+const getContacts = () => {
+    const options = {
+        method: "GET",
+        uri: `http://contacts:5000/contacts/`,
+        timeout: 3000,
+        json: true,
+    };
+    return new Promise((resolve, reject) => {
+        request(options, (err, res) => {
+            if (err) {
+                console.error("ERR", err);
+                return reject(err);
+            }
+            console.log("BODY", res.body);
+            return resolve(res.body || null);
+        });
+    });
+};
+
+const getContact = (id) => {
+    const options = {
+        method: "GET",
+        uri: `http://contacts:5000/contacts/${id}`,
+        timeout: 3000,
+        json: true,
+    };
+    return new Promise((resolve, reject) => {
+        request(options, (err, res) => {
+            if (err) {
+                console.error("ERR", err);
+                return reject(err);
+            }
+            console.log("BODY", res.body);
+            return resolve(res.body || null);
+        });
+    });
+};
 module.exports = (router) => {
     router.route('/phones')
         // CREATE NEW PHONE
@@ -23,12 +61,39 @@ module.exports = (router) => {
         })
         // GET ALL PHONES
         .get(function (req, res) {
-            Phone.find(function (err, phones) {
+            Phone.find(async function (err, phones) {
                 if (err) {
                     return res.status(404).send(err);
                 }
+                let phoneI = 0;
+                let ownerI = 0;
+                let skipOwners = false;
+                for await (let phone of phones) {
+                    ownerI = 0;
+                    for await (let owner of phone.owners) {
+                        console.log(owner);
+                        const ownerID = owner;
+                        const contact = await getContact(ownerID).catch(console.error);
+                        if(contact == null) {
+                            skipOwners = true;
+                            break;
+                        }
+                        phones[phoneI].owners[ownerI] = contact;
+                        ownerI++;
+                    }
+                    if(skipOwners) {
+                        console.log("SKIPPING");
+                        const {owners, ...payload} = phones[phoneI]._doc;
+                        phones[phoneI] = payload; 
+                        //phones[phoneI].owners = null;
+                        //delete phones[phoneI].owners;
+                    }
+                    phoneI++;
+
+                }
 
                 res.status(200).json(phones);
+
             });
         });
 

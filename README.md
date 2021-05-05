@@ -6,6 +6,10 @@ All information is expected and provided in **JSON** format.
 # API Documentation
 ### [Postman](https://documenter.getpostman.com/view/8269992/Tz5s5HBo)
 
+# TODO
+### Create a contact together with a phone
+
+
 # Requirements
 * Git 
 
@@ -50,3 +54,4 @@ Docker runs these services:
   * Create a manufacturer (e.g. Apple)
   * Create a phone (e.g. iPhone X)
   * Proceed with adding more manufacturers or phones and updating them.
+  * 
