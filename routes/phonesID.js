@@ -40,10 +40,8 @@ module.exports = (router) => {
                     
                     if(ignoreOwners) {
                         const {owners, ...payload} = phone._doc;
-                        console.log("RETURNING PAYLOAD", payload, phone);
                         res.status(200).json(payload);
                     } else {
-                        console.log("RETURNING PHONE", phone)
                         res.status(200).json(phone);
                     }
                     
