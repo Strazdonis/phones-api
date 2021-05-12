@@ -9,6 +9,7 @@ const createContact = (body) => {
         json: true,
         body: body,
     };
+
     return new Promise((resolve, reject) => {
         request(options, (err, res) => {
             if (err) {
@@ -39,6 +40,7 @@ const getContact = (id) => {
         });
     });
 };
+
 module.exports = (router) => {
     router.route('/phones')
         // CREATE NEW PHONE
