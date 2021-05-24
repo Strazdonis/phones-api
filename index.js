@@ -6,16 +6,19 @@ const Manufacturer = require('./models/manufacturer');
 const port = 80;
 const mongoose = require('mongoose');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 const soap = require('soap');
+const { exec } = require('child_process');
 require('dotenv').config();
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 async function getPhone(args) {
     const phone = await Phone.findOne(args).exec();
     console.log(phone);
     return {
-        id: args._id.toString(),
-        manufacturer: phone.manufacturer,
+        id: phone._id.toString(),
+        manufacturer: phone.manufacturer?.toString(),
         name: phone.name,
         description: phone.description,
         photoUrls: phone.photoUrls,
@@ -23,18 +26,41 @@ async function getPhone(args) {
     };
 }
 
+async function getManufacturer(args) {
+    const manufacturer = await Manufacturer.findOne(args).exec();
+    console.log(manufacturer);
+    return {
+        id: manufacturer._id.toString(),
+        name: manufacturer.name,
+    };
+}
+
 async function getPhones() {
+    console.log("GETTING PHONES");
     const phones = await Phone.find().exec();
     console.log(phones);
-    var returnArr = [];
+    const returnArr = [];
     phones.forEach((phone) => {
         returnArr.push({
-            id: args._id.toString(),
-            manufacturer: phone.manufacturer,
+            id: phone._id.toString(),
+            manufacturer: phone.manufacturer?.toString(),
             name: phone.name,
             description: phone.description,
             photoUrls: phone.photoUrls,
             owners: phone.owners,
+        });
+    });
+    return returnArr;
+}
+
+async function getManufacturers(args) {
+    const manufacturers = await Manufacturer.find().exec();
+    console.log(manufacturers);
+    const returnArr = [];
+    manufacturers.forEach((manufacturer) => {
+        returnArr.push({
+            id: manufacturer._id.toString(),
+            name: manufacturer.name,
         });
     });
     return returnArr;
@@ -53,15 +79,33 @@ async function createPhone(args) {
         id: phone._id.toString(),
         name: phone.name,
         description: phone.description,
-        manufacturer: phone.manufacturer,
+        manufacturer: phone.manufacturer?.toString(),
         owners: phone.owners,
         photoUrls: phone.photoUrls,
+    };
+}
+
+
+async function createManufacturer(args) {
+    const manufacturer = await new Manufacturer({
+        name: args.name,
+    }).save();
+    console.log(manufacturer);
+    return {
+        id: manufacturer._id.toString(),
+        name: manufacturer.name,
     };
 }
 
 async function deletePhone(args) {
     console.log(args);
     const phone = await Phone.findByIdAndDelete(args._id).exec();
+    return;
+}
+
+async function deleteManufacturer(args) {
+    console.log(args);
+    const manufacturer = await Manufacturer.findByIdAndDelete(args._id).exec();
     return;
 }
 
@@ -72,6 +116,10 @@ const serviceObject = {
             Phones: getPhones,
             CreatePhone: createPhone,
             DeletePhone: deletePhone,
+            Manufacturer: getManufacturer,
+            Manufacturers: getManufacturers,
+            CreateManufacturer: createManufacturer,
+            DeleteManufacturer: deleteManufacturer,
         },
     },
 };
@@ -82,7 +130,7 @@ mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
-    app.use(express.json());
+
     const router = express.Router();
     app.use('/api/v1', router);
 

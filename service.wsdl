@@ -19,14 +19,30 @@
                     </s:sequence>
                 </s:complexType>
             </s:element>
+            <s:element name="ManufacturerRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="_id" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
             <s:element name="PhoneResponse">
                 <s:complexType>
                     <s:sequence>
                         <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
-                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:manufacturer"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:string"/>
                         <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
-                        <s:element minOccurs="0" maxOccurs="unbounded" name="photoUrls" type="s:string"/>
-                        <s:element minOccurs="0" maxOccurs="1" name="owners" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbound" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbound" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="ManufacturerResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
                     </s:sequence>
                 </s:complexType>
             </s:element>
@@ -36,21 +52,47 @@
                     </s:sequence>
                 </s:complexType>
             </s:element>
+            <s:element name="ManufacturersRequest">
+                <s:complexType>
+                    <s:sequence>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
             <s:element name="PhonesResponse">
                 <s:complexType>
                     <s:sequence>
                         <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
-                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:manufacturer"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:string"/>
                         <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
-                        <s:element minOccurs="0" maxOccurs="unbounded" name="photoUrls" type="s:string"/>
-                        <s:element minOccurs="0" maxOccurs="1" name="owners" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbound" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbound" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="ManufacturersResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
                     </s:sequence>
                 </s:complexType>
             </s:element>
             <s:element name="CreatePhoneRequest">
                 <s:complexType>
                     <s:sequence>
-                        <s:element minOccurs="1" maxOccurs="1" name="dish" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbound" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbound" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreateManufacturerRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
                     </s:sequence>
                 </s:complexType>
             </s:element>
@@ -58,10 +100,18 @@
                 <s:complexType>
                     <s:sequence>
                         <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
-                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:manufacturer"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:string"/>
                         <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
-                        <s:element minOccurs="0" maxOccurs="unbounded" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="photoUrls" type="s:string"/>
                         <s:element minOccurs="0" maxOccurs="1" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreateManufacturerResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="name" type="s:string"/>
                     </s:sequence>
                 </s:complexType>
             </s:element>
@@ -72,7 +122,20 @@
                     </s:sequence>
                 </s:complexType>
             </s:element>
+            <s:element name="DeleteManufacturerRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="_id" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
             <s:element name="DeletePhoneResponse">
+                <s:complexType>
+                    <s:sequence>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="DeleteManufacturerResponse">
                 <s:complexType>
                     <s:sequence>
                     </s:sequence>
@@ -105,6 +168,30 @@
     <wsdl:message name="DeletePhoneSoapOut">
         <wsdl:part name="parameters" element="tns:DeletePhoneResponse"/>
     </wsdl:message>
+    <wsdl:message name="ManufacturerSoapIn">
+        <wsdl:part name="parameters" element="tns:ManufacturerRequest"/>
+    </wsdl:message>
+    <wsdl:message name="ManufacturerSoapOut">
+        <wsdl:part name="parameters" element="tns:ManufacturerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ManufacturersSoapIn">
+        <wsdl:part name="parameters" element="tns:ManufacturersRequest"/>
+    </wsdl:message>
+    <wsdl:message name="ManufacturersSoapOut">
+        <wsdl:part name="parameters" element="tns:ManufacturersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreateManufacturerSoapIn">
+        <wsdl:part name="parameters" element="tns:CreateManufacturerRequest"/>
+    </wsdl:message>
+    <wsdl:message name="CreateManufacturerSoapOut">
+        <wsdl:part name="parameters" element="tns:CreateManufacturerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="DeleteManufacturerSoapIn">
+        <wsdl:part name="parameters" element="tns:DeleteManufacturerRequest"/>
+    </wsdl:message>
+    <wsdl:message name="DeleteManufacturerSoapOut">
+        <wsdl:part name="parameters" element="tns:DeleteManufacturerResponse"/>
+    </wsdl:message>
     <!-- PORT TYPES: defines the complete communication operation (one way/round trip) -->
     <wsdl:portType name="PhoneSoapPort">
         <!-- The operation name must be the same as the one specified in the service object -->
@@ -123,6 +210,22 @@
         <wsdl:operation name="DeletePhone">
             <wsdl:input message="tns:DeletePhoneSoapIn"/>
             <wsdl:output message="tns:DeletePhoneSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="Manufacturer">
+            <wsdl:input message="tns:ManufacturerSoapIn"/>
+            <wsdl:output message="tns:ManufacturerSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="Manufacturers">
+            <wsdl:input message="tns:ManufacturersSoapIn"/>
+            <wsdl:output message="tns:ManufacturersSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateManufacturer">
+            <wsdl:input message="tns:CreateManufacturerSoapIn"/>
+            <wsdl:output message="tns:CreateManufacturerSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteManufacturer">
+            <wsdl:input message="tns:DeleteManufacturerSoapIn"/>
+            <wsdl:output message="tns:DeleteManufacturerSoapOut"/>
         </wsdl:operation>
     </wsdl:portType>
     <!-- BINDING: provides details on how a portType operation will actually be transmitted -->
@@ -160,6 +263,46 @@
         <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="DeletePhone">
             <soap:operation soapAction="DeletePhone" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Manufacturer">
+            <soap:operation soapAction="Manufacturer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Manufacturers">
+            <soap:operation soapAction="Manufacturers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="CreateManufacturer">
+            <soap:operation soapAction="CreateManufacturer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="DeleteManufacturer">
+            <soap:operation soapAction="DeleteManufacturer" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

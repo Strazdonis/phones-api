@@ -54,4 +54,48 @@ Docker runs these services:
   * Create a manufacturer (e.g. Apple)
   * Create a phone (e.g. iPhone X)
   * Proceed with adding more manufacturers or phones and updating them.
-  * 
+
+# SOAP requests
+### Get all phones
+```
+<s11:Envelope xmlns:s11='http://schemas.xmlsoap.org/soap/envelope/'>
+  <s11:Body>
+    <ns1:PhonesRequest xmlns:ns1='http://tempuri.org/'>
+    </ns1:PhonesRequest>
+  </s11:Body>
+</s11:Envelope>
+```
+### Get Phone by ID
+```
+<s11:Envelope xmlns:s11='http://schemas.xmlsoap.org/soap/envelope/'>
+  <s11:Body>
+    <ns1:PhoneRequest xmlns:ns1='http://tempuri.org/'>
+      <ns1:_id>6051c6b0d93aed1184286576</ns1:_id>
+    </ns1:PhoneRequest>
+  </s11:Body>
+</s11:Envelope>
+```
+### Create Phone
+```
+<s11:Envelope xmlns:s11='http://schemas.xmlsoap.org/soap/envelope/'>
+  <s11:Body>
+    <ns1:CreatePhoneRequest xmlns:ns1='http://tempuri.org/'>
+      <ns1:name>Mi 9T Pro</ns1:name>
+      <ns1:manufacturer>60509d9f042196b1374c2ad7</ns1:manufacturer>
+      <ns1:description>A phone</ns1:description>
+      <ns1:photoUrls>https://www.giztop.com/media/catalog/product/cache/dc206057cdd42d7e34b9d36e347785ca/x/i/xiaomi_mi_9t_pro_global.png</ns1:photoUrls>
+      <ns1:owners>12345</ns1:owners>
+    </ns1:CreatePhoneRequest>
+  </s11:Body>
+</s11:Envelope>
+```
+### Delete Phone
+```
+<s11:Envelope xmlns:s11='http://schemas.xmlsoap.org/soap/envelope/'>
+    <s11:Body>
+        <ns1:DeletePhoneRequest xmlns:ns1='http://tempuri.org/'>
+            <ns1:_id>60ab749df99da7384094009c</ns1:_id>
+        </ns1:DeletePhoneRequest>
+    </s11:Body>
+</s11:Envelope>
+```
