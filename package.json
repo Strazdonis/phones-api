@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.11.18",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "soap": "^0.38.0"
   }
 }

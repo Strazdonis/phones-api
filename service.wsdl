@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <definitions> must be the root of the WSDL document -->
+<wsdl:definitions targetNamespace="http://tempuri.org/" 
+    xmlns:s="http://www.w3.org/2001/XMLSchema" 
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+    xmlns:tns="http://tempuri.org/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <!-- WSDL TYPES: definition of the data types that are used in the web service -->
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+            <s:element name="PhoneRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="_id" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="PhoneResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:manufacturer"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbounded" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="PhonesRequest">
+                <s:complexType>
+                    <s:sequence>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="PhonesResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:manufacturer"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbounded" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreatePhoneRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="dish" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="CreatePhoneResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="manufacturer" type="s:manufacturer"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="description" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="unbounded" name="photoUrls" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="owners" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="DeletePhoneRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="_id" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="DeletePhoneResponse">
+                <s:complexType>
+                    <s:sequence>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+        </s:schema>
+    </wsdl:types>
+    <!-- MESSAGES: defines the data being exchanged between the service and client -->
+    <wsdl:message name="PhoneSoapIn">
+        <wsdl:part name="parameters" element="tns:PhoneRequest"/>
+    </wsdl:message>
+    <wsdl:message name="PhoneSoapOut">
+        <wsdl:part name="parameters" element="tns:PhoneResponse"/>
+    </wsdl:message>
+    <wsdl:message name="PhonesSoapIn">
+        <wsdl:part name="parameters" element="tns:PhonesRequest"/>
+    </wsdl:message>
+    <wsdl:message name="PhonesSoapOut">
+        <wsdl:part name="parameters" element="tns:PhonesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePhoneSoapIn">
+        <wsdl:part name="parameters" element="tns:CreatePhoneRequest"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePhoneSoapOut">
+        <wsdl:part name="parameters" element="tns:CreatePhoneResponse"/>
+    </wsdl:message>
+    <wsdl:message name="DeletePhoneSoapIn">
+        <wsdl:part name="parameters" element="tns:DeletePhoneRequest"/>
+    </wsdl:message>
+    <wsdl:message name="DeletePhoneSoapOut">
+        <wsdl:part name="parameters" element="tns:DeletePhoneResponse"/>
+    </wsdl:message>
+    <!-- PORT TYPES: defines the complete communication operation (one way/round trip) -->
+    <wsdl:portType name="PhoneSoapPort">
+        <!-- The operation name must be the same as the one specified in the service object -->
+        <wsdl:operation name="Phone">
+            <wsdl:input message="tns:PhoneSoapIn"/>
+            <wsdl:output message="tns:PhoneSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="Phones">
+            <wsdl:input message="tns:PhonesSoapIn"/>
+            <wsdl:output message="tns:PhonesSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePhone">
+            <wsdl:input message="tns:CreatePhoneSoapIn"/>
+            <wsdl:output message="tns:CreatePhoneSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="DeletePhone">
+            <wsdl:input message="tns:DeletePhoneSoapIn"/>
+            <wsdl:output message="tns:DeletePhoneSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <!-- BINDING: provides details on how a portType operation will actually be transmitted -->
+    <wsdl:binding name="PhoneServiceSoapBinding" type="tns:PhoneSoapPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Phone">
+            <soap:operation soapAction="Phone" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Phones">
+            <soap:operation soapAction="Phones" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="CreatePhone">
+            <soap:operation soapAction="CreatePhone" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="DeletePhone">
+            <soap:operation soapAction="DeletePhone" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <!-- SERVICE:  -->
+    <wsdl:service name="PhoneService">
+        <wsdl:port name="PhoneServiceSoapPort" binding="tns:PhoneServiceSoapBinding">
+            <soap:address location="http://localhost:80/wsdl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
