@@ -34,7 +34,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"iPhone 3\",\r\n    \"photoUrls\": [], \r\n    \"manufacturer\": \"60509d9f042196b1374c2ad7\",\r\n    \"description\": \"123\"\r\n}",
+					"raw": "{\r\n    \"name\": \"iPhone 3\",\r\n    \"photoUrls\": [],\r\n    \"manufacturer\": \"60509d9f042196b1374c2ad7\",\r\n    \"description\": \"123\",\r\n    \"owners\": [\r\n        {\r\n            \"id\": \"1337\",\r\n            \"name\": \"Edvinas\",\r\n            \"surname\": \"Strazdonis\",\r\n            \"number\": \"+37066666666\",\r\n            \"email\": \"edvinas@strazdonis.com\"\r\n        },\r\n        {\r\n            \"id\": \"2000\",\r\n            \"name\": \"Rokas\",\r\n            \"surname\": \"Buozelis\",\r\n            \"number\": \"+37061231231\",\r\n            \"email\": \"rokas@buozelis.com\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -129,7 +129,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/api/v1/phones/604ba829a7ba7f3780209a64s",
+					"raw": "http://localhost/api/v1/phones/:id",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -138,7 +138,13 @@
 						"api",
 						"v1",
 						"phones",
-						"604ba829a7ba7f3780209a64s"
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "604ba829a7ba7f3780209b64"
+						}
 					]
 				},
 				"description": "Returns phone JSON or `null` if the phone wasn't found."

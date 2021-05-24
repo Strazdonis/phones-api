@@ -126,7 +126,7 @@ const serviceObject = {
 
 const xml = fs.readFileSync("service.wsdl", "utf8");
 
-mongoose.connect(process.env.DB_URI, {
+mongoose.connect("mongodb://mongo:27017/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
